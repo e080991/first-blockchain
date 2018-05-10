@@ -1,5 +1,4 @@
-pragma solidity ^0.4.21;
-
+pragma solidity ^0.4.18;
 
 /**
  * Utility library of inline functions on addresses
@@ -7,21 +6,15 @@ pragma solidity ^0.4.21;
 library AddressUtils {
 
   /**
-   * Returns whether the target address is a contract
+   * Returns whether there is code in the target address
    * @dev This function will return false if invoked during the constructor of a contract,
    *  as the code is not actually created until after the constructor finishes.
-   * @param addr address to check
-   * @return whether the target address is a contract
+   * @param addr address address to check
+   * @return whether there is code in the target address
    */
   function isContract(address addr) internal view returns (bool) {
     uint256 size;
-    // XXX Currently there is no better way to check if there is a contract in an address
-    // than to check the size of the code at that address.
-    // See https://ethereum.stackexchange.com/a/14016/36603
-    // for more details about how this works.
-    // TODO Check this again before the Serenity release, because all addresses will be
-    // contracts then.
-    assembly { size := extcodesize(addr) }  // solium-disable-line security/no-inline-assembly
+    assembly { size := extcodesize(addr) }
     return size > 0;
   }
 

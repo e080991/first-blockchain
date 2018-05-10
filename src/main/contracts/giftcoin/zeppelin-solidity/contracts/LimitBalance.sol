@@ -1,4 +1,4 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.18;
 
 
 /**
@@ -23,7 +23,7 @@ contract LimitBalance {
    * @dev Checks if limit was reached. Case true, it throws.
    */
   modifier limitedPayable() {
-    require(address(this).balance <= limit);
+    require(this.balance <= limit);
     _;
 
   }
